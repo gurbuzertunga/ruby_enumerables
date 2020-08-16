@@ -2,8 +2,6 @@
 
 > For this project, we created two **sorting algorithms** that use the [bubble sort](https://en.wikipedia.org/wiki/Bubble_sort) method.
 
-This side-by-side comparative method is seen in the GIF image below.
-
 > The second bubble sort method sorts an array of strings by the length of each element using the "yield" keyword and a code block.
 
 ## Built With
