@@ -1,5 +1,3 @@
-# Enumerable Methods
-module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
@@ -146,5 +144,3 @@ module Enumerable
   def multiply_els
     my_inject { |i, j| i * j }
   end
-  include Enumerable
-end
