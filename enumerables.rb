@@ -1,6 +1,8 @@
+# Enumerable Methods
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
+
     n = 0
     while n < size
       yield(self[n])
@@ -8,9 +10,12 @@ module Enumerable
     end
     self
   end
+
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
-    n, x = 0, 0
+
+    n = 0
+    x = 0
     while n < size
       yield(self[n], x)
       n += 1
@@ -18,18 +23,25 @@ module Enumerable
     end
     self
   end
+
   def my_select
     return to_enum(:my_select) unless block_given?
-    n, outcome = 0, []
+
+    n = 0
+    outcome = []
     while n < size
       outcome.push(self[n]) if yield(self[n])
       n += 1
     end
     outcome
   end
+
   def my_all
     return to_enum(:my_all) unless block_given?
-    n, x, outcome = 0, 0, []
+
+    n = 0
+    x = 0
+    outcome = []
     while n < size
       if yield(self[n])
         outcome.push(true)
@@ -45,9 +57,13 @@ module Enumerable
     end
     result
   end
+
   def my_any
     return to_enum(:my_any) unless block_given?
-    n, x, outcome = 0, 0, []
+
+    n = 0
+    x = 0
+    outcome = []
     while n < size
       if yield(self[n])
         outcome.push(true)
@@ -63,9 +79,13 @@ module Enumerable
     end
     result
   end
+
   def my_none
     return to_enum(:my_none) unless block_given?
-    n, x, outcome= 0, 0, []
+
+    n = 0
+    x = 0
+    outcome = []
     while n < size
       if yield(self[n])
         outcome.push(true)
@@ -81,12 +101,15 @@ module Enumerable
     end
     result
   end
+
   def my_count
     return to_enum(:my_count) unless block_given?
+
     n = 0
     n += 1 while n < size
     n
   end
+
   def my_map(&proc_1)
     n = 0
     my_new_map = []
@@ -103,8 +126,10 @@ module Enumerable
     end
     my_new_map
   end
+
   def my_inject
     return to_enum(:my_inject) unless block_given?
+
     n = 0
     my_inject = []
     while n < size
@@ -117,6 +142,7 @@ module Enumerable
     end
     my_inject[n - 1]
   end
+
   def multiply_els
     my_inject { |i, j| i * j }
   end
