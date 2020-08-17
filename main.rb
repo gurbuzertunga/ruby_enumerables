@@ -1,10 +1,10 @@
 require_relative 'enumerables.rb'
-my_array = [2,4,7,10,6]
-p my_array.my_each{|i| i}
-my_array.my_each_with_index{|i,j|p "#{j} : #{i}" }
-p my_array.my_select{|i| i.even?}
-p my_array.my_all{|i| i.even?}
-p my_array.my_any{|i| i.odd?}
+my_array = [2, 4, 7, 10, 6]
+p my_array.my_each { |i| i }
+my_array.my_each_with_index { |i, j| p "#{j} : #{i}" }
+p my_array.my_select { |i| i.even? }
+p my_array.my_all { |i| i.even? }
+p my_array.my_any { |i| i.odd? }
 # p my_array.my_none{|i| i.odd?}
 # p my_array.my_count{|i|}
 # p my_array.my_map{|i| i * i}
