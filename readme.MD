@@ -1,8 +1,8 @@
-# Bubble Sort
+# Advanced Building Blocks - Enumerables
 
-> For this project, we created two **sorting algorithms** that use the [bubble sort](https://en.wikipedia.org/wiki/Bubble_sort) method.
+> For this project, we re-created Ruby's **enumerable methods** .
 
-> The second bubble sort method sorts an array of strings by the length of each element using the "yield" keyword and a code block.
+> We created the most used Enumerable methods with an extensive use of the Ruby methods, data types, loops and conditionals.
 
 ## Built With
 
@@ -27,13 +27,13 @@ To get this project up and running, you must already have ruby installed on your
 1. Open Terminal.
 2. Navigate to your desired location to download the contents of this repository.
 3. Copy and paste the following code into the Terminal:
-    git clone https://github.com/gurbuzertunga/bubble_sort.git
+    git clone https://github.com/gurbuzertunga/ruby_enumerables.git
 4. Hit enter.
 5. Once the repository has been cloned, navigate inside the repository and type:
-    ruby bubble_sort.rb
+    ruby main.rb
     This will run the code, printing the output of our tests to the terminal.
-6. To change those tests, simply open bubble_sort.rb in a code editor and modify the values stored in the test_array and test_run variables.
-6. Enjoy sorted arrays of data for the rest of your life.
+6. To change those tests, simply open main.rb in a code editor and modify the values stored in the my_array and my_** variables.
+6. Enjoy your own methods for the rest of your life.
 
 ## Authors
 
@@ -48,8 +48,10 @@ To get this project up and running, you must already have ruby installed on your
 
 ## Show your support
 If you've read this far, you must like the project! Give us a :star:️!
+
 ## Acknowledgments
 - This Project was part of an assignment available on The Odin Project.
 - Our thanks to Microverse and all our peers and colleagues there.
+
 ## :memo: License
 This project has no license
