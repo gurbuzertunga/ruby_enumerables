@@ -1,9 +1,12 @@
 # rubocop: disable Metrics/ModuleLength
 module Enumerable
-  def my_each
-    for i in 0...self.length
-      yield(self[i])
+  def my_each(arr = nil)
+    return to_enum unless block_given?
+
+    Array(self).length.times do |i|
+      yield(Array(self)[i])
     end
+    self
   end
 
   def my_each_with_index
@@ -76,38 +79,82 @@ module Enumerable
   end
 
 
-  def my_none
-    outcome = true
-      self.my_each { |item| outcome = false if yield(item)}
+  def my_none?(arg = nil)
+    if arg == nil
+      if !block_given? 
+        output = true
+        self.my_each { |item| output = false if !item  || item == nil}
+        return output
+      else
+        outcome = true
+        self.my_each { |item| outcome = false if yield(item)}
+        return outcome
+      end
+    else
+      if arg.is_a?(Class)
+      outcome = true
+      self.my_each { |item| outcome = false if item.is_a?(arg)  }
       return outcome
+      else
+      outcome = true
+      self.my_each { |item| outcome = false if item == (arg) || item.match?(arg)  }
+      return outcome
+      end
+    end
     
   end
 
-  def my_count
-    return to_enum(:my_count) unless block_given?
-
+  def my_count(arg = nil)
+  if arg == nil
     n = 0
     n += 1 while n < size
     n
-  end
-
-  def my_map(&proc_1)
+  else
+    if arg.is_a?(Class)
+      n = 0
+      self.my_each { |item| n += 1 if item.is_a?(arg)  }
+      return n
+    elsif arg.is_a?(Integer)
+      n = 0
+      self.my_each { |item| n += 1 if item == (arg)}
+      return n
+    
+    else arg.is_a?(String)
     n = 0
-    my_new_map = []
-    if !proc_1.nil?
-      while n < size
-        my_new_map.push(proc_1.call(self[n]))
-        n += 1
-      end
-    elsif block_given?
-    self.my_each{|i| my_new_map.push(yield(i))}
-    return my_new_map
+    self.my_each { |item| n += 1 if item == (arg) || item.match?(arg)}
+    return n
     end
-    my_new_map
+  end
   end
 
-  def my_inject
-    return to_enum(:my_inject) unless block_given?
+  def my_map(arg = nil)
+    if arg == nil
+        return to_enum unless block_given?
+        output = []
+        self.my_each { |item| output.push(yield(item))}
+       output
+    elsif arg.class == Proc
+        self.my_each { |item| Proc.call(item)}
+    elsif 
+      if arg.is_a?(Class)
+      output = []
+      self.my_each { |item| output.push(item) if item.is_a?(arg)}
+      output
+      elsif arg.is_a?(Integer)
+      output = []
+      self.my_each { |item| output.push(item) if item == (arg)}
+       output
+      else arg.is_a?(String)
+      output = []
+      self.my_each { |item| output.push(item) if item == (arg) || item.match?(arg)}
+       output
+      end
+    end
+    output
+  end
+
+  def my_inject(arg = nil)
+    raise("LocalJumpError.new NO BLOCK HERE!") if !block_given?
 
     n = 0
     my_inject = []
