@@ -12,7 +12,7 @@
 
 ## Live Demo
 
-To quickly see our project in action, visit the [live demo](https://repl.it/@gurbuzertunga/bubblesort) on repl.it.
+To quickly see our project in action, visit the [live demo](https://repl.it/@gurbuzertunga/rubyenumerables#main.rb) on repl.it.
 
 ## Getting Started
 
