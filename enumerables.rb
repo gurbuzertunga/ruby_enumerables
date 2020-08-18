@@ -1,14 +1,9 @@
 # rubocop: disable Metrics/ModuleLength
 module Enumerable
   def my_each
-    return to_enum(:my_each) unless block_given?
-
-    n = 0
-    while n < size
-      yield(self[n])
-      n += 1
+    for i in 0...self.length
+      yield(self[i])
     end
-    self
   end
 
   def my_each_with_index
@@ -27,80 +22,42 @@ module Enumerable
 
   def my_select
     return to_enum(:my_select) unless block_given?
-
-    n = 0
     outcome = []
-    while n < size
-      outcome.push(self[n]) if yield(self[n])
-      n += 1
-    end
-    outcome
+    self.my_each{|i| outcome.push(i) if yield(i)}
+    return outcome
   end
 
   def my_all
-    return to_enum(:my_all) unless block_given?
+    if !block_given? 
+      output = true
+      self.my_each { |item| output = false if !item  || item == nil}
+      return output
+    else
 
-    n = 0
-    x = 0
-    outcome = []
-    while n < size
-      if yield(self[n])
-        outcome.push(true)
-      else
-        outcome.push(false)
-      end
-      n += 1
+      outcome = true
+      self.my_each { |item| outcome = false if !yield(item)}
+      return outcome
     end
-    result = true
-    while x < outcome.size
-      result = false if outcome[x] == false
-      x += 1
-    end
-    result
   end
 
   def my_any
-    return to_enum(:my_any) unless block_given?
-
-    n = 0
-    x = 0
-    outcome = []
-    while n < size
-      if yield(self[n])
-        outcome.push(true)
-      else
-        outcome.push(false)
-      end
-      n += 1
+    if !block_given? 
+      output = true
+      self.my_each { |item| output = false if !item  || item == nil}
+      return output
+    else
+    outcome = false
+      self.my_each { |item| outcome = true if yield(item)}
+      return outcome
     end
-    result = false
-    while x < outcome.size
-      result = true if outcome[x] == true
-      x += 1
-    end
-    result
   end
 
-  def my_none
-    return to_enum(:my_none) unless block_given?
 
-    n = 0
-    x = 0
-    outcome = []
-    while n < size
-      if yield(self[n])
-        outcome.push(true)
-      else
-        outcome.push(false)
-      end
-      n += 1
-    end
-    result = true
-    while x < outcome.size
-      result = false if outcome[x] == true
-      x += 1
-    end
-    result
+  def my_none
+    outcome = true
+      self.my_each { |item| outcome = false if yield(item)}
+      return outcome
+    
   end
 
   def my_count
@@ -120,11 +77,8 @@ module Enumerable
         n += 1
       end
     elsif block_given?
-
-      while n < size
-        my_new_map.push(yield(self[n]))
-        n += 1
-      end
+    self.my_each{|i| my_new_map.push(yield(i))}
+    return my_new_map
     end
     my_new_map
   end
