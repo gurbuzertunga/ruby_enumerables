@@ -1,47 +1,75 @@
 require_relative 'enumerables.rb'
-my_array = [2, 6, 4, 6, 8]
-my_hash = { "Jane Doe" => 10, "Jim Doe" => 6 }
-my_range = (0..9)
-# p my_array.my_each { |i| i }
-p my_range.my_each_with_index { |i| p i}
-# p my_hash.my_each{ |i, j| p "#{j} : #{i}" }
-# my_array.my_each_with_index { |i, j| p "#{j} : #{i}" }
-# p my_array.my_select { |i| i.even? }
-# p my_array.my_all? { |i| i.even? }
-# p my_hash.my_any?{ |i, j| i.length >= 3  }
-# p my_array.my_none{|i| i.odd?}
-# p my_array.my_count{|i|}
-# p my_array.my_map{|i| i * i}
-# p [2, 6, 4, 6, 8].my_map{|i| i * i}
-# p my_array.map{|i| i * i}
-# p [2, 6, 4, 6, 8].map{|i| i * i}
+# my_array = [2, 6, 4, 6, 8]
+# my_hash = { 'Jane Doe' => 10, 'Jim Doe' => 6 }
+# my_range = (10..15)
+####### test cases for my_each ###########
+# p my_array.my_each { |i|  i }
+# my_range.my_each { |i| print i}
+# p my_hash.my_each { |i, j|  "#{i} : #{j}"}
+##########################################
 
-# p my_array.my_inject
-# p my_array.multiply_els
+### test cases for my_each_with_index ####
+# my_range.my_each_with_index { |i , x| p "#{x} : #{i}"}
+# my_array.my_each_with_index { |i, j| p "#{j} : #{i}" }
+# my_hash.my_each { |i, j| p "#{i} : #{j}"}
+##########################################
+
+####### test cases for my_select #########
+# p my_array.my_select { |i| i.even? }
+# p my_range.my_select { |i| i.even? }
+# my_hash.my_select { |i , j| p j.even? }# j here is the value
+
+##########################################
+
+####### test cases for my_all? ###########
+# p my_array.my_all? { |i| i.even? }
+# p my_range.my_all? { |i| i.even? }
+# p my_hash.my_all? { |i, j| j.even? }# j here is the value
+##########################################
+
+####### test cases for my_any? ###########
+# p my_array.my_any? { |i| i.odd? }
+# p my_range.my_any? { |i| i.even? }
+# p my_hash.my_any? { |i, j| j.odd? }# j here is the value
+# p my_array.my_any?(3)
+# p my_range.my_any?(11)
+# p my_hash.my_any?(4)
+##########################################
+
+####### test cases for my_none? ##########
+# p my_array.my_none? { |i| i.odd? }
+# p my_range.my_none? { |i| i.even? }
+# p my_hash.my_none? { |i, j| j.odd? }# j here is the value
+# p my_array.my_none?(3)
+# p my_range.my_none?(11)
+# p my_hash.my_none?(4)
+##########################################
+
+####### test cases for my_count#########
+# p my_array.my_count
+# p my_range.my_count
+# p my_hash.my_count
+# p my_array.my_count(3)
+# p my_range.my_count(11)
+# p my_hash.my_count(4)
+##########################################
+
+####### test cases for my_map #########
+# p my_array.my_map {|i| i * i}
+# p [2, 6, 4, 6, 8].my_map{|i| i * i}
 # proc = Proc.new {|i| i**2}
 # p my_array.my_map(&proc)
 # p my_array.my_map {|i| i**2}
-#######################################################
+# p my_array.my_map
+##########################################
 
-# p %w[Marc Luc Jean].my_map { |text| text.size == 3 } # => true
-# p %w[Marc Luc Jean].my_any? { |text| text.size >= 4 } # => false
-# p [2, 3, 6, 7, 4, 8, 10].my_any?(3) # => false
-# p %w[Marc Luc Dante].my_map("Luc")# => false
-# p %w[Marc Luc Jean].my_count(/c/) # => false
-# p [1, 5i, 5.67].my_none?(Numeric) # => true
-# p [2, 1, 6, 2, 4, 8, 10].my_map(2) # => true
-# p [nil, true, 99].my_any? # => false
-# p [nil, false].my_any? # => false
-# p [nil, nil, nil].my_any? # => false
-# p [].my_any? # => true
-# %w[Marc Luc Jean].all? { |text| text.size >= 3 } # => true
-# %w[Marc Luc Jean].all? { |text| text.size >= 4 } # => false
-# [2, 1, 6, 7, 4, 8, 10].all?(3) # => false
-# %w[Marc Luc Jean].all?('Jean') # => false
-# %w[Marc Luc Jean].all?(/a/) # => false
-# [1, 5i, 5.67].all?(Numeric) # => true
-# [2, 1, 6, 7, 4, 8, 10].all?(Integer) # => true
-# [nil, true, 99].all? # => false
-# [nil, false].all? # => false
-# [nil, nil, nil].all? # => false
-# [].all? # => true
+####### test cases for my_inject #########
+# p my_array.my_inject {|i| i * 3}
+# p [2, 6, 4, 6, 8].my_inject{|i| i * 5}
+# p my_array.my_inject {|i| i**2}
+# p my_array.my_inject (:*)
+##########################################
+
+# p multiply_els(my_array)
+
+##########################################
