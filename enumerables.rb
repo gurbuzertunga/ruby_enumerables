@@ -27,28 +27,51 @@ module Enumerable
     return outcome
   end
 
-  def my_all
-    if !block_given? 
-      output = true
-      self.my_each { |item| output = false if !item  || item == nil}
-      return output
+  def my_all?(arg = nil)
+    if arg == nil
+      if !block_given? 
+        output = true
+        self.my_each { |item| output = false if !item  || item == nil}
+        return output
+      else
+        outcome = true
+        self.my_each { |item| outcome = false if !yield(item)}
+        return outcome
+      end
     else
-
-      outcome = true
-      self.my_each { |item| outcome = false if !yield(item)}
-      return outcome
+      if arg.is_a?(Class)
+        outcome = true
+        self.my_each { |item| outcome = false if item.is_a?(arg)  }
+        return outcome
+      else
+        outcome = true
+        self.my_each { |item| outcome = false if item == (arg) || item.match?(arg)  }
+        return outcome
+      end
     end
   end
 
-  def my_any
-    if !block_given? 
-      output = true
-      self.my_each { |item| output = false if !item  || item == nil}
-      return output
+  def my_any?(arg = nil)
+    if arg == nil
+      if !block_given? 
+        output = false
+        self.my_each { |item| output = true if !item  || item == nil}
+        return output
+      else
+        outcome = false
+        self.my_each { |item| outcome = true if yield(item)}
+        return outcome
+      end
     else
-    outcome = false
-      self.my_each { |item| outcome = true if yield(item)}
+      if arg.is_a?(Class)
+      outcome = false
+      self.my_each { |item| outcome = true if item.is_a?(arg)  }
       return outcome
+      else
+      outcome = false
+      self.my_each { |item| outcome = true if item == (arg) || item.match?(arg)  }
+      return outcome
+      end
     end
   end
 
