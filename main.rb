@@ -1,7 +1,7 @@
 require_relative 'enumerables.rb'
-my_array = [2, 6, 4, 6, 8]
-my_hash = { 'Jane Doe' => 10, 'Jim Doe' => 6 }
-my_range = (10..15)
+#my_array = [2, 6, 4, 6, 8]
+#my_hash = { 'Jane Doe' => 10, 'Jim Doe' => 6 }
+#my_range = (10..15)
 ####### test cases for my_each ###########
 #p my_array.my_each { |i|  i }
 #my_range.each { |i| puts i}
