@@ -78,7 +78,7 @@ module Enumerable
   def my_none?(arg = nil)
     if arg.nil? && !block_given?
       output = true
-      my_each { |item| output = false if item || item.nil? }
+      my_each { |item| output = false if !item || item.nil? }
       output
     elsif block_given?
       outcome = true
@@ -142,7 +142,7 @@ module Enumerable
   end
 
   def my_inject(*arg)
-    # raise("LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!") if !block_given? || arg[0] == nil?
+    raise("LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!") if !block_given? || arg[0] == nil?
     check = false
     result = Array(self)[0]
     if (arg[0].class == Symbol) || arg[0].nil?
