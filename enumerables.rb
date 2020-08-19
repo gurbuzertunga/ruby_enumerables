@@ -143,7 +143,7 @@ module Enumerable
 
   def my_inject(*arg)
     raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? || arg[0] == nil?
-    
+
     check = false
     result = Array(self)[0]
     if (arg[0].class == Symbol) || arg[0].nil?
