@@ -37,23 +37,23 @@ module Enumerable
       outcome
     elsif arg.is_a?(Class)
       outcome = true
-      my_each { |item| outcome = false if item.is_a?(arg) }
+      my_each { |item| outcome = false unless item.is_a?(arg) }
       outcome
     elsif arg.is_a?(Integer)
       outcome = true
-      my_each { |item| outcome = false if item == arg }
+      my_each { |item| outcome = false if item != arg }
       outcome
-    elsif arg.is_a?(String)
+    elsif arg.is_a?(String) || arg.is_a?(Regexp)
       outcome = true
-      my_each { |item| outcome = false if item.match?(arg) }
+      my_each { |item| outcome = false unless item.match?(arg) }
       outcome
     end
   end
 
   def my_any?(arg = nil)
     if arg.nil? && !block_given?
-      output = false
-      my_each { |item| output = true if !item || item.nil? }
+      output = true
+      my_each { |item| output = false if !item || item.nil? }
       output
     elsif block_given?
       outcome = false
@@ -67,7 +67,7 @@ module Enumerable
       outcome = false
       my_each { |item| outcome = true if item == arg }
       outcome
-    elsif arg.is_a?(String)
+    elsif arg.is_a?(String) || arg.is_a?(Regexp)
       outcome = false
       my_each { |item| outcome = true if item.match?(arg) }
       outcome
@@ -78,7 +78,7 @@ module Enumerable
   def my_none?(arg = nil)
     if arg.nil? && !block_given?
       output = true
-      my_each { |item| output = false if !item || item.nil? }
+      my_each { |item| output = false if item || item.nil? }
       output
     elsif block_given?
       outcome = true
@@ -92,7 +92,7 @@ module Enumerable
       outcome = true
       my_each { |item| outcome = false if item == arg }
       outcome
-    elsif arg.is_a?(String)
+    elsif arg.is_a?(String) || arg.is_a?(Regexp)
       outcome = true
       my_each { |item| outcome = false if item.match?(arg) }
       outcome
@@ -101,16 +101,16 @@ module Enumerable
 
   def my_count(arg = nil)
     n = 0
-    if arg.nil?
+    if block_given?
+      my_each { |item| n += 1 if yield(item) }
+    elsif arg.nil?
       n += 1 while n < size
     elsif arg.is_a?(Class)
       my_each { |item| n += 1 if item.is_a?(arg) }
     elsif arg.is_a?(Integer)
       my_each { |item| n += 1 if item == arg }
-
     else arg.is_a?(String)
          my_each { |item| n += 1 if item == arg || item.match?(arg) }
-
     end
     n
   end

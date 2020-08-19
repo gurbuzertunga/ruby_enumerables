@@ -25,6 +25,9 @@ require_relative 'enumerables.rb'
 # p my_array.my_all? { |i| i.even? }
 # p my_range.my_all? { |i| i.even? }
 # p my_hash.my_all? { |i, j| j.even? }# j here is the value
+# p res = ['apple', 'orange'].my_all?
+# p ['Gurbuz', 'Turkiye', 'uretim'].my_all?(/u/)
+# p ['Gurbuz', 'Turkiye', 'kretim'].my_all?(/v/)
 ##########################################
 
 ####### test cases for my_any? ###########
@@ -34,6 +37,9 @@ require_relative 'enumerables.rb'
 # p my_array.my_any?(3)
 # p my_range.my_any?(11)
 # p my_hash.my_any?(4)
+# p res = ['apple', 'orange'].my_any?
+# p ['Gurbuz', 'Turkiye', 'uretim'].my_any?(/u/)
+# p ['Gurbuz', 'Turkiye', 'kretim'].my_any?(/v/)
 ##########################################
 
 ####### test cases for my_none? ##########
@@ -43,6 +49,9 @@ require_relative 'enumerables.rb'
 # p my_array.my_none?(3)
 # p my_range.my_none?(11)
 # p my_hash.my_none?(4)
+# p res = ['apple', 'orange'].my_none?
+# p ['Gurbuz', 'Turkiye', 'uretim'].my_none?(/u/)
+# p ['Gurbuz', 'Turkiye', 'kretim'].my_none?(/v/)
 ##########################################
 
 ####### test cases for my_count#########
@@ -52,6 +61,7 @@ require_relative 'enumerables.rb'
 # p my_array.my_count(3)
 # p my_range.my_count(11)
 # p my_hash.my_count(4)
+# p res = ['apple', 'dante', 'cherry'].my_count { |element| element == 'apple' }
 ##########################################
 
 ####### test cases for my_map #########
