@@ -1,11 +1,11 @@
 require_relative 'enumerables.rb'
-#my_array = [2, 6, 4, 6, 8]
-#my_hash = { 'Jane Doe' => 10, 'Jim Doe' => 6 }
-#my_range = (10..15)
+# my_array = [2, 6, 4, 6, 8]
+# my_hash = { 'Jane Doe' => 10, 'Jim Doe' => 6 }
+# my_range = (10..15)
 ####### test cases for my_each ###########
-#p my_array.my_each { |i|  i }
-#my_range.each { |i| puts i}
-#p my_hash.each { |i, j|  "#{i} : #{j}"}
+# p my_array.my_each { |i|  i }
+# my_range.each { |i| puts i}
+# p my_hash.each { |i, j|  "#{i} : #{j}"}
 ##########################################
 
 ### test cases for my_each_with_index ####
@@ -65,7 +65,7 @@ require_relative 'enumerables.rb'
 ##########################################
 
 ####### test cases for my_map #########
-#p my_array.my_map {|i| i * i}
+# p my_array.my_map {|i| i * i}
 # p [2, 6, 4, 6, 8].my_map{|i| i * i}
 # proc = Proc.new {|i| i**2}
 # p my_array.my_map(&proc)
