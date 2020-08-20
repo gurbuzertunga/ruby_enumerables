@@ -52,8 +52,8 @@ module Enumerable
 
   def my_any?(arg = nil)
     if arg.nil? && !block_given?
-      output = true
-      my_each { |item| output = false if !item || item.nil? }
+      output = false
+      my_each { |item| output = true if item && !item.nil? }
       output
     elsif block_given?
       outcome = false
@@ -78,7 +78,7 @@ module Enumerable
   def my_none?(arg = nil)
     if arg.nil? && !block_given?
       output = true
-      my_each { |item| output = false if !item || item.nil? }
+      my_each { |item| output = false if item && !item.nil? }
       output
     elsif block_given?
       outcome = true
@@ -123,7 +123,7 @@ module Enumerable
       my_each { |item| output.push(yield(item)) }
       output
     elsif arg.class == Proc
-      my_each { |item| Proc.call(item) }
+      my_each { |item| Proc(item) if item }
     elsif arg.is_a?(Class)
       output = []
       my_each { |item| output.push(item) if item.is_a?(arg) }
@@ -142,7 +142,7 @@ module Enumerable
   end
 
   def my_inject(*arg)
-    raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? || arg[0] == nil?
+    raise('LocalJumpError.new NO BLOCK OR ARGUMENT GIVEN!') if !block_given? && arg == nil?
 
     check = false
     result = Array(self)[0]
